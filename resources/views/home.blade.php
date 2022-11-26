@@ -13,7 +13,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
+                        @if(auth()->user()->isAdmin())
+                            {{ __('Hello admin!') }}
+                        @endif
                     {{ __('You are logged in!') }}
                 </div>
             </div>
