@@ -28,12 +28,16 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('posts', PostController::class);
 
 //Users (Public)
-Route::get('/users', [UserController::class, 'index'])->name('users');
 //Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
 //Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 
-//user role changes
+//User Role Changes (Public)
 Route::post('/users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
 Route::post('/users/{user}/verify-guest', [UserController::class, 'verifyGuest'])->name('users.verify-guest');
 
+//Admin routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    //Users (Admin)
+    Route::get('/users', [UserController::class, 'index'])->name('users');
+});

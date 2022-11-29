@@ -63,7 +63,7 @@ class UserController extends Controller
     {
         $user->role = 'admin';
         $user->save();
-        session()->flash('alert', 'User is succesvol een admin gemaakt.');
+        session()->flash('success', 'User is succesvol een admin gemaakt.');
 
         return redirect(route('users'));
     }
@@ -72,7 +72,7 @@ class UserController extends Controller
     {
         $user->role = 'user';
         $user->save();
-        session()->flash('alert', 'User is succesvol geverifieerd.');
+        session()->flash('success', 'User is succesvol geverifieerd.');
 
         return redirect(route('users'));
     }
