@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PostController;
@@ -26,4 +25,14 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
+
+//Users (Public)
+Route::get('/users', [UserController::class, 'index'])->name('users');
+//Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
+//Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
+Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+
+//user role changes
+Route::post('/users/{user}/make-admin', [UserController::class, 'makeAdmin'])->name('users.make-admin');
+Route::post('/users/{user}/verify-guest', [UserController::class, 'verifyGuest'])->name('users.verify-guest');
 
