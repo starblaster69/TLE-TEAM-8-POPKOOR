@@ -1,51 +1,57 @@
-@extends('posts.layout')
+@extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Popkoor Singing Beat Evenementen</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('posts.create') }}"> Create New Post</a>
-            </div>
-        </div>
-    </div>
-
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
     @endif
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header"><h1>Popkoor Singing Beat Evenementen</h1></div>
 
-    <table class="table table-bordered">
-        <tr>
-            <th>No</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th width="280px">Action</th>
-        </tr>
-        @foreach ($posts as $post)
-            <tr>
-                <td>{{ ++$i }}</td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->description }}</td>
-                <td>
-                    <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
+                    <div class="card-body">
+                        <div class="pull-right">
+                            <a class="btn btn-success" href="{{ route('posts.create') }}"> Maak nieuwe post</a>
+                        </div>
 
-                        <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Show</a>
+                        <table class="table table-responsive table-hover">
+                            <tr>
+                                <th>No</th>
+                                <th>Titel</th>
+                                <th>Beschrijving</th>
+                                <th width="280px">Actie</th>
+                            </tr>
+                            @foreach ($posts as $post)
+                                <tr>
+                                    <td>{{ ++$i }}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{{ $post->description }}</td>
+                                    <td>
+                                        <form action="{{ route('posts.destroy',$post->id) }}" method="POST">
 
-                        <a class="btn btn-primary" href="{{ route('posts.edit',$post->id) }}">Edit</a>
+                                            <a class="btn btn-info" href="{{ route('posts.show',$post->id) }}">Meer</a>
 
-                        @csrf
-                        @method('DELETE')
+                                            <a class="btn btn-primary"
+                                               href="{{ route('posts.edit',$post->id) }}">Bewerken</a>
 
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        @endforeach
-    </table>
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger">Verwijderen</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
     {!! $posts->links() !!}
 

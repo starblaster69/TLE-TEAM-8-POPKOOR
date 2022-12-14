@@ -25,7 +25,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Popkoor Singing Beat
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,21 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @if(auth()->guest())
+                        @elseif (auth()->user()->isAdmin())
+                            <div>
+                                <a class="nav-link" href="{{ url('/users') }}">Users</a>
+                            </div>
+                        @endif
+                        @if(auth()->guest())
+                        @elseif (auth()->user())
+                            <div>
+                                <a class="nav-link" href="{{ url('/posts') }}">Posts</a>
+                            </div>
+                        @endif
+                        <div>
+                            <a class="nav-link" href="{{ url('/') }}">Home</a>
+                        </div>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
