@@ -40,7 +40,8 @@
                                     <button id="id"
                                             name="id"
                                             value="{{$user->id}}"
-                                            type="submit" class="btn btn-danger">Delete
+                                            type="submit" class="btn btn-danger">
+                                        Verwijder
                                     </button>
                                 </form>
                                 @if($user->role != 'user' && $user->role != 'admin')
