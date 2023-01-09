@@ -28,7 +28,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('posts', PostController::class);
 
 //Users (Public)
-//Route::get('/users/profile', [UserController::class, 'edit'])->name('users.edit');
+Route::get('/users/profile', [UserController::class, 'show'])->name('users.show');
+Route::get('/users/profile/settings', [UserController::class, 'edit'])->name('users.edit');
 //Route::post('/users/{user}', [UserController::class, 'update'])->name('users.update');
 Route::delete('/users/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
 
