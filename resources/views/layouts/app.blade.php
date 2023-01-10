@@ -24,7 +24,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/home') }}">
                 Popkoor Singing Beat
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -43,14 +43,10 @@
                         </div>
                     @endif
                     @if(auth()->guest())
+
                     @elseif (auth()->user())
-                        <div>
-                            <a class="nav-link" href="{{ url('/posts') }}">Posts</a>
-                        </div>
+
                     @endif
-                    <div>
-                        <a class="nav-link" href="{{ url('/member') }}">Member</a>
-                    </div>
                     <div>
                         <a class="nav-link" href="{{ url('/') }}">Album</a>
                     </div>

@@ -23,8 +23,9 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <a class="btn btn-primary" href="{{ route('posts.index') }}">Terug</a>
+                            <a class="btn btn-primary" href="{{ route('home') }}">Terug</a>
                         </div>
+                        <br>
                     </div>
                 </div>
             </div>

@@ -80,6 +80,19 @@
                                     <a href="/home">ledensite.</a>
                                 </p>
                             @endif
+                            @if(auth()->user()->isAdmin())
+                                <form action="{{route('posts.destroy', $post->id)}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <div class="justify-content-center row row-cols-auto">
+                                        <input id="id"
+                                               name="id"
+                                               type="hidden"
+                                               value="{{$post->id}}">
+                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                    </div>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>

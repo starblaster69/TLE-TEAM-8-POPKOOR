@@ -16,7 +16,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()->paginate(5);
 
-        return view('posts.index',compact('posts'))
+        return view('home',compact('posts'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -45,7 +45,7 @@ class PostController extends Controller
 
         Post::create($request->all());
 
-        return redirect()->route('posts.index')
+        return redirect()->route('home')
             ->with('success','Post created successfully.');
     }
 
@@ -87,7 +87,7 @@ class PostController extends Controller
 
         $post->update($request->all());
 
-        return redirect()->route('posts.index')
+        return redirect()->route('home')
             ->with('success','Post updated successfully');
     }
     /**
@@ -96,11 +96,14 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Request $request)
     {
-        $post->delete();
-
-        return redirect()->route('posts.index')
-            ->with('success','Post deleted successfully');
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:posts'
+            ]);
+        Post::destroy($validated);
+        session()->flash('alert', 'Product successfully deleted.');
+        return redirect('home');
     }
 }
