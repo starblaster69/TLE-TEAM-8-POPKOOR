@@ -62,6 +62,9 @@
 
                     @endif
                     <div>
+                        <a class="nav-link" href="{{ url('/repertoire') }}">Repertoire</a>
+                    </div>
+                    <div>
                         <a class="nav-link" href="{{ url('/') }}">Album</a>
                     </div>
                         <div>

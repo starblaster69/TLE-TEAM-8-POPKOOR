@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MusicTracksController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\UserController;
@@ -22,15 +23,14 @@ use App\Http\Controllers\PostController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/home', function () {
-    return view('home', PostController::class);
-});
 
 Auth::routes();
 
 Route::get('/home', [PostController::class, 'index'])->name('home');
 
 Route::resource('posts', PostController::class);
+
+Route::resource('repertoire', MusicTracksController::class);
 
 //Users (Public)
 Route::get('/users/profile', [UserController::class, 'show'])->name('users.show');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -55,9 +56,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post/*, Comment $comment*/)
     {
-        return view('posts.show',compact('post'));
+//        $this.getComments($post)
+        return view('posts.show',compact('post'/*, 'comment'*/));
     }
 
     /**
@@ -106,4 +108,6 @@ class PostController extends Controller
         session()->flash('alert', 'Product successfully deleted.');
         return redirect('home');
     }
+
+//    public function makeComment()
 }
