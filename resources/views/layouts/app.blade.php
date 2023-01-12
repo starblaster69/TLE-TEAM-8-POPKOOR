@@ -1,5 +1,19 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+//belangrijk voor css
+<div class="area" >
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -24,7 +38,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/home') }}">
                 Popkoor Singing Beat
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -43,14 +57,10 @@
                         </div>
                     @endif
                     @if(auth()->guest())
+
                     @elseif (auth()->user())
-                        <div>
-                            <a class="nav-link" href="{{ url('/posts') }}">Posts</a>
-                        </div>
+
                     @endif
-                    <div>
-                        <a class="nav-link" href="{{ url('/member') }}">Member</a>
-                    </div>
                     <div>
                         <a class="nav-link" href="{{ url('/') }}">Album</a>
                     </div>

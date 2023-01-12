@@ -1,48 +1,48 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>Add New Post</h2>
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('posts.index') }}"> Back</a>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Voeg nieuwe post toe</div>
+                <div class="card-body">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <strong>Oeps</strong> Er is iets mis met uw input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('posts.store') }}" method="POST">
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Titel:</strong>
+                                    <input type="text" name="title" class="form-control" placeholder="Titel">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Beschrijving:</strong>
+                                    <textarea class="form-control" style="height:150px" name="description"
+                                              placeholder="Beschrijving"></textarea>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <button type="submit" class="btn btn-primary">Opslaan</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
-    <form action="{{ route('posts.store') }}" method="POST">
-        @csrf
-
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Title:</strong>
-                    <input type="text" name="title" class="form-control" placeholder="Title">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Description:</strong>
-                    <textarea class="form-control" style="height:150px" name="description" placeholder="Description"></textarea>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Opslaan</button>
-            </div>
-        </div>
-
-    </form>
 @endsection
