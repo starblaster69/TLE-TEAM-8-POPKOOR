@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@elseif(auth()->user()->isAdmin())
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -46,3 +48,4 @@
     </div>
 
 @endsection
+@endif

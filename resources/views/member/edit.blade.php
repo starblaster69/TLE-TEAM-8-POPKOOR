@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@elseif(auth()->user()->isAdmin())
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
@@ -25,6 +27,19 @@
 
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div>
+                                        <form action="{{route('member.destroy', $post->id)}}" method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <div class="justify-content-center row row-cols-auto">
+                                                <input id="id"
+                                                       name="id"
+                                                       type="hidden"
+                                                       value="{{$post->id}}">
+                                                <input type="submit" value="Verwijderen" class="btn btn-danger">
+                                            </div>
+                                        </form>
+                                    </div>
                                     <div class="form-group">
                                         <strong>Titel:</strong>
                                         <input type="text" name="title" value="{{ $post->title }}" class="form-control"
@@ -54,3 +69,7 @@
 
 
 @endsection
+
+@else
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@endif

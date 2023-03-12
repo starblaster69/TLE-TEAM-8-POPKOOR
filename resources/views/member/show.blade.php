@@ -1,5 +1,10 @@
 @extends('layouts.app')
-
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/login'"/>
+@elseif(auth()->user()->isAdmin() || auth()->user()->isVerified())
+@else
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@endif
 @section('content')
     <div class="container">
         <div class="row justify-content-center">

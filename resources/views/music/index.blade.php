@@ -1,6 +1,7 @@
-
 @extends('layouts.app')
-
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/login'"/>
+@else
 @section('content')
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -14,9 +15,12 @@
                     <div class="card-header"><h1>Popkoor Singing Beat Repertoires</h1></div>
 
                     <div class="card-body">
-                        <div class="pull-right">
-                            <a class="btn btn-success" href="{{ route('repertoire.create') }}"> Nieuw Nummer Toevoegen</a>
-                        </div>
+                        @if(auth()->user()->isAdmin())
+                            <div class="pull-right">
+                                <a class="btn btn-success" href="{{ route('repertoire.create') }}"> Nieuw Nummer
+                                    Toevoegen</a>
+                            </div>
+                        @endif
 
                         <table class="table table-responsive table-hover">
                             <tr>
@@ -33,7 +37,8 @@
                                     <td>
                                         <form action="{{ route('repertoire.destroy',$musicTrack->id) }}" method="POST">
 
-                                            <a class="btn btn-info" href="{{ route('repertoire.show',$musicTrack->id) }}">Openen</a>
+                                            <a class="btn btn-info"
+                                               href="{{ route('repertoire.show',$musicTrack->id) }}">Openen</a>
 
                                             <a class="btn btn-primary"
                                                href="{{ route('repertoire.edit',$musicTrack->id) }}">Bewerken</a>
@@ -52,3 +57,5 @@
             </div>
         </div>
 @endsection
+
+@endif

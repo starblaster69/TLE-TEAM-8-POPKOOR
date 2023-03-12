@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@if(auth()->user()->role == 'admin')
 @section('content')
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -53,6 +53,10 @@
 
 
 
-    {!! $posts->links() !!}
+        {!! $posts->links() !!}
 
-@endsection
+        @endsection
+
+@else
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@endif

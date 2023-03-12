@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/login'"/>
+@elseif(auth()->user()->isAdmin() || auth()->user()->isVerified())
 @section('content')
     @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -44,10 +47,9 @@
                 </div>
             </div>
         </div>
+        @endsection
+@else
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@endif
 
-
-
-    {!! $posts->links() !!}
-
-@endsection
 

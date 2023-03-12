@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@if(auth()->guest())
+    <meta http-equiv="Refresh" content="0; url='/login'"/>
+@elseif(auth()->user()->isAdmin())
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -164,3 +166,6 @@
     </form>
 
 @endsection
+@else
+    <meta http-equiv="Refresh" content="0; url='/404'"/>
+@endif

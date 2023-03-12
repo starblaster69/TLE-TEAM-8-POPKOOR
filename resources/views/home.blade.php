@@ -1,11 +1,13 @@
 @extends('layouts.app')
-
+@if(!auth()->user())
+    <meta http-equiv="Refresh" content="0; url='/register'"/>
+@else
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header purple">{{ __('Status') }}</div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -13,44 +15,51 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                            Je bent ingelogd als {{ auth()->user()->role }}.
+                        Je bent ingelogd als {{ auth()->user()->role }}.
                         @if(auth()->user()->isAdmin())
                             <div>
                                 <form action="/users">
-                                    <input type="submit" value="Users"/>
+                                    <input type="submit" value="Gebruikers"/>
                                 </form>
                             </div>
                         @endif
-                        @if(auth()->user()->isVerified())
-                                <div>
-                                    <form action="/member">
-                                        <input type="submit" value="Ledensite"/>
-                                    </form>
-                                </div>
+                        @if(auth()->user()->role == 'member')
+                            <div>
+                                <form action="/member">
+                                    <input type="submit" value="Ledensite"/>
+                                </form>
+                            </div>
                         @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br/>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Pages') }}</div>
+                    <div class="card-header purple">{{ __('Pages') }}</div>
                     <div class="card-body">
                         <div>
-                            <h2>Welkom Leden!</h2>
+                            <h2>Welkom bij het Popkoor Singing Beat!</h2>
                             <text>
                                 <div>
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                                    Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                                    when an unknown printer took a galley of type and scrambled it to make a type
-                                    specimen book. It has survived not only five centuries, but also the leap into
-                                    electronic typesetting, remaining essentially unchanged. It was popularised in the
-                                    1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more
-                                    recently with desktop publishing software like Aldus PageMaker including versions of
-                                    Lorem Ipsum.
+                                    Zingen maakt blij,
+
+                                    - zingen is vrijheid,
+                                    - zingen is gezellig,
+                                    - zingen is samenwerking,
+                                    - zingen is los van alles,
+                                    - zingen is gewoon leuk,
+                                    - dat vinden wij nou ook!
+
+                                    Popkoor Singing Beat bestaat sinds maart 2001 en telt inmiddels zo’n 70 enthousiaste zangliefhebbers, maar we hebben zeker nog plaats voor Hoge en Lage stempartijen.
+
+                                    Wie kan lid worden van Popkoor Singing Beat?
+                                    Iedereen die van zingen houdt: JONG (vanaf 18 jaar) OF OUD, MAN OF VROUW.
+                                    Dus lees verder en misschien wel TOT ZINGS!
                                 </div>
                             </text>
                         </div>
@@ -59,16 +68,17 @@
             </div>
         </div>
     </div>
+    <br/>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Posts') }}</div>
+                    <div class="card-header purple">{{ __('Posts') }}</div>
                     <div class="card-body">
                         @if(auth()->user()->isAdmin())
-                        <div class="pull-right">
-                            <a class="btn btn-success" href="{{ route('posts.create') }}"> Maak nieuwe post</a>
-                        </div>
+                            <div class="pull-right">
+                                <a class="btn btn-success" href="{{ route('posts.create') }}"> Maak nieuwe post</a>
+                            </div>
                         @endif
                         @foreach ($posts as $post)
                             <div class="card">
@@ -94,23 +104,25 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">{{ __('Recent Images') }}</div>
-                    <div class="card-body">
-                        <div class="img-fluid">Img 1</div>
-                        <div class="img-fluid">Img 2</div>
-                        <div class="img-fluid">Img 3</div>
-                        <form action="/">
-                            <label for="img">Select image:</label>
-                            <input type="file" id="img" name="img" accept="image/*">
-                            <input type="submit">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <br/>
+{{--    <div class="container">--}}
+{{--        <div class="row justify-content-center">--}}
+{{--            <div class="col-md-8">--}}
+{{--                <div class="card">--}}
+{{--                    <div class="card-header purple">{{ __('Recent Images') }}</div>--}}
+{{--                    <div class="card-body">--}}
+{{--                        <div class="img-fluid">Img 1</div>--}}
+{{--                        <div class="img-fluid">Img 2</div>--}}
+{{--                        <div class="img-fluid">Img 3</div>--}}
+{{--                        <form action="/">--}}
+{{--                            <label for="img">Select image:</label>--}}
+{{--                            <input type="file" id="img" name="img" accept="image/*">--}}
+{{--                            <input type="submit">--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
 @endsection
+@endif
